@@ -1,0 +1,5 @@
+full=$(i3-msg -t get_workspaces | jq '.[].num')
+all=$(echo {1..10} | sed -e 's/ /\n/g')
+empty=$(echo -e "$full\\n$all" | sort | uniq -u | sort -n)
+final=$(echo "$empty" | head -n 1)
+i3-msg workspace number $final

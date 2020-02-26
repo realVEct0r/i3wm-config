@@ -1,0 +1,192 @@
+[colors]
+red = #e53935
+pink = #d81b60
+purple = #8e24aa
+deep-purple = #5e35b1
+indigo = #3949ab
+blue = #1e88e5
+light-blue = #039be5
+cyan = #00acc1
+teal = #00897b
+green = #43a047
+light-green = #7cb342
+lime = #c0ca33
+yellow = #fdd835
+amber = #ffb300
+orange = #fb8c00
+deep-orange = #f4511e
+brown = #6d4c41
+grey = #757575
+blue-gray = #546e7a
+white = #ffffff
+black = #000000
+violet = #8e1eff
+
+foreground = ${self.white}
+background = ${self.bground}
+
+; date = ${self.blue}
+; network = ${self.purple}
+; battery = ${self.green}
+; alsa = ${self.orange}
+date = ${self.shade1}
+network = ${self.shade2}
+battery = ${self.shade3}
+alsa = ${self.shade4}
+
+focused = ${self.pink}
+unfocused = ${self.blue}
+
+shade1 = #0D47A1
+shade2 = #1565C0
+shade3 = #1976D2
+shade4 = #1E88E5
+shade5 = #2196F3
+shade6 = #42A5F5
+shade7 = #64B5F6
+shade8 = #90CAF9
+accent = #1E88E5
+bground = #aaf7f7f7
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = %Y-%m-%d
+time = %H:%M
+format =  <label>
+format-padding = 2
+label = %date% %time%
+format-background = ${colors.date}
+format-foreground = ${colors.foreground}
+
+[module/date-arrow]
+content = 
+type = custom/text
+content-background = ${colors.network}
+content-foreground = ${colors.date}
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+
+format-connected =  <label-connected>
+format-connected-background = ${colors.network}
+format-connected-foreground = ${colors.foreground}
+format-connected-padding = 2
+
+format-disconnected =  <label-disconnected>
+format-disconnected-background = ${colors.network}
+format-disconnected-foreground = ${colors.foreground}
+format-disconnected-padding = 2
+
+label-connected = "%essid%  %upspeed%  %downspeed%"
+label-disconnected =  "Not Connected"
+
+[module/network-arrow]
+content = 
+type = custom/text
+content-background = ${colors.battery}
+content-foreground = ${colors.network}
+
+[module/battery]
+type = internal/battery
+full-at = 98
+battery = BAT0
+adapter = AC
+
+format-charging =  <label-charging>
+format-charging-background = ${colors.battery}
+format-charging-foreground = ${colors.foreground}
+format-charging-padding = 2
+
+format-discharging =  <label-discharging>
+format-discharging-background = ${colors.battery}
+format-discharging-foreground = ${colors.foreground}
+format-discharging-padding = 2
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+
+label-full =  Fully Charged
+label-full-background = ${colors.battery}
+label-full-foreground = ${colors.foreground}
+label-full-padding = 2
+
+[module/battery-arrow]
+content = 
+type = custom/text
+content-background = ${colors.alsa}
+content-foreground = ${colors.battery}
+
+[module/alsa]
+type = internal/alsa
+
+format-volume =  <label-volume>
+format-volume-background = ${colors.alsa}
+format-volume-foreground = ${colors.foreground}
+format-volume-padding = 2
+
+label-volume = %percentage%%
+
+format-muted-prefix = 
+label-muted = "Muted"
+format-muted-background = ${colors.alsa}
+format-muted-foreground = ${colors.foreground}
+format-muted-padding = 2
+
+[module/alsa-arrow]
+content = 
+type = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.alsa}
+
+
+[module/i3]
+type = internal/i3
+index-sort = true
+enable-click = true
+
+format = <label-state> <label-mode>
+label-mode = %mode%
+
+label-focused = %index%
+; label-focused = 
+label-focused-foreground = ${colors.focused}
+label-focused-background = ${colors.background}
+label-unfocused = %index%
+; label-unfocused = 
+label-unfocused-foreground = ${colors.unfocused}
+label-unfocused-background = ${colors.background}
+
+label-separator = |
+label-separator-padding = 2
+
+
+[bar/main]
+width = 100%
+height = 24
+font-0 = Noto Sans CJK SC:style=Regular:size=12;2
+font-1 = PowerlineSymbols:style=Medium:size=12;2
+font-2 = FontAwesome:12;2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+fixed-center = true
+radius = 12.12
+module-margin = 0
+dim-value = 1.0
+line_size = 12
+line_color = #666
+
+tray-position = left
+tray-background = ${colors.background}
+
+
+modules-left = 
+modules-center = i3
+modules-right = temperature alsa-arrow alsa battery-arrow battery network-arrow network date-arrow date
+
+[settings]
